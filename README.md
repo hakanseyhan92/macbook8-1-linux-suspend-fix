@@ -73,15 +73,7 @@ Reports from other models with `applespi` (MacBook9,1, MacBook10,1, MacBookPro13
 
 ## Related: no sound from the speakers
 
-The MacBook8,1 speakers (Cirrus Logic CS4208 codec) stay silent with the stock kernel drivers. [thomas-shirley/macbook8.1-speaker-driver](https://github.com/thomas-shirley/macbook8.1-speaker-driver) fixes this with patched drivers that DKMS rebuilds for each new kernel, and it also restores audio after resume.
-
-On dkms 3.0.11 (Ubuntu 24.04 / Linux Mint 22), its DKMS build fails because DKMS runs `CLEAN` after `PRE_BUILD`, and `CLEAN="rm -rf build"` deletes the freshly built modules. Until [PR #9](https://github.com/thomas-shirley/macbook8.1-speaker-driver/pull/9) is merged, change that line in `dkms.conf` before running its `install.sh`:
-
-```sh
-sed -i 's/^CLEAN="rm -rf build"/CLEAN="true"/' dkms.conf
-```
-
-With that change the driver has been rebuilding automatically on every kernel update here (6.17.0-29 through 7.0.0-38).
+If the speakers are silent too, see [macbook8-1-linux-audio-fix](https://github.com/hakanseyhan92/macbook8-1-linux-audio-fix).
 
 ---
 
@@ -108,4 +100,4 @@ s2idle uykuda S3'ten biraz daha fazla enerji harcar. Sürekli şarjda kullanıla
 
 Geri almak için: `sudo rm /etc/systemd/sleep.conf.d/s2idle.conf`
 
-**Hoparlörden ses gelmiyorsa:** [thomas-shirley/macbook8.1-speaker-driver](https://github.com/thomas-shirley/macbook8.1-speaker-driver) sürücüsünü kurun. Linux Mint 22 / Ubuntu 24.04'te kurmadan önce `dkms.conf` içindeki `CLEAN="rm -rf build"` satırını `CLEAN="true"` yapın (yukarıdaki İngilizce bölümde komut var). Aksi halde DKMS derlenen modülleri siliyor ve kurulum başarısız oluyor.
+**Hoparlörden ses gelmiyorsa:** [macbook8-1-linux-audio-fix](https://github.com/hakanseyhan92/macbook8-1-linux-audio-fix) deposuna bakın.
